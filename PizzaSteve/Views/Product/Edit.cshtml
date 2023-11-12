@@ -1,0 +1,49 @@
+﻿@model PizzaSteve.Models.Product
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.page-container {
+			position: relative;
+			padding-left: 20px;
+			padding-right: 500px;
+			padding-bottom: 20px;
+			padding-top: 20px;
+		}
+
+	</style>
+</head>
+<div class="page-container">
+	<h2>Edit Product</h2>
+
+	<form asp-action="Edit">
+		<input type="hidden" asp-for="Id" />
+		<div class="mb-3 col-12">
+			<label asp-for="Name"></label>
+			<input asp-for="Name" class="form-control" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-12">
+			<label asp-for="Description"></label>
+			<textarea asp-for="Description" rows="3" class="form-control"></textarea>
+			<span asp-validation-for="Description" class="text-danger"></span>
+		</div>
+		<div class="mb-3 col-12">
+			<label asp-for="Price"></label>
+			<input asp-for="Price" class="form-control" />
+			<span asp-validation-for="Price" class="text-danger"></span>
+		</div>
+
+
+		<div class="mb-3 col-12">
+			<label class="custom-file-label" asp-for="Image"></label>
+			<input type="url" asp-for="Image" class="form-control" />
+			<span asp-validation-for="Image" class="text-danger"></span>
+		</div>
+
+
+
+		<button type="submit" class="btn btn-primary">Save Changes</button>
+		<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+	</form>
+</div>
