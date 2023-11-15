@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzaSteve.Data;
 using PizzaSteve.Models;
 
@@ -13,12 +14,12 @@ namespace PizzaSteve.Controllers
         {
             _context = context;
         }
-        [HttpGet("Create")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(Contact contact)
         {
             _context.Contacts.Add(contact);

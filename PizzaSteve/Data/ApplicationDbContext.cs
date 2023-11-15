@@ -39,6 +39,5 @@ namespace PizzaSteve.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Admin> Admin { get; set; }
     }
 }

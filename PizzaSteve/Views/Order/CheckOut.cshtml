@@ -1,0 +1,32 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<PizzaSteve.Setting.StripeSetting> Stripe
+@model PizzaSteve.Models.Dto.OrderDto
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> _signInManager
+@inject UserManager<User> _userManager
+
+<div class="container">
+<form asp-controller="Order" asp-action="CheckOut" method="post" oninput="TotalPrice.value = parseInt(price.value)*parseInt(quantity.value)">
+
+
+	<div class="form-group">
+		<label for="image">User Name:</label>
+		<input class="form-control p-4" type="text" asp-for="UserName" disabled>
+	</div><div class="form-group">
+		<label for="image">Product Name:</label>
+		<input class="form-control p-4" type="text" asp-for="ProductName" disabled>
+	</div><div class="form-group">
+		<label for="image">Price:</label>
+		<input id="price" class="form-control p-4" type="text" asp-for="Price" disabled>
+	</div><div class="form-group">
+            <label for="image">Quantity:</label>
+		<input id="quantity" class="form-control p-4" type="number" min="1" value="1" asp-for="Quantity">
+	</div><div class="form-group">
+		<label for="image">Total Price:</label>
+		<input id="TotalPrice" class="form-control p-4" type="number" value="@Model.Price" asp-for="TotalPrice" disabled>
+	</div>
+											<input type="hidden" asp-for="ProductId" value="@Model.ProductId" />
+											<button type="submit">Place Order</button>
+									
+</form>
+</div>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzaSteve.Data;
 using PizzaSteve.Models;
 
@@ -19,8 +20,13 @@ namespace PizzaSteve.Controllers
             var inventory = _context.Inventories.ToList();
             return View(inventory);
         }
+        public IActionResult ManageIndex()
+        {
+            var inventory = _context.Inventories.ToList();
+            return View(inventory);
+        }
 
-        [HttpGet("Details/{id}")]
+        [HttpGet]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -36,23 +42,23 @@ namespace PizzaSteve.Controllers
             return View(inventory);
 
         }
-
-        [HttpGet("Create")]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(Inventory inventory)
         {
             _context.Inventories.Add(inventory);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
 
         }
 
-        [HttpGet("Edit/{id}")]
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
 
@@ -71,7 +77,7 @@ namespace PizzaSteve.Controllers
 
         }
 
-        [HttpPost("Edit/{id}")]
+        [HttpPost]
         public IActionResult Edit(Inventory inventory)
         {
 
@@ -85,7 +91,7 @@ namespace PizzaSteve.Controllers
             {
                 _context.Update(inventory);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ManageIndex));
 
             }
 
@@ -94,7 +100,7 @@ namespace PizzaSteve.Controllers
         }
 
 
-        [HttpGet("Delete/{id}")]
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +116,7 @@ namespace PizzaSteve.Controllers
             return View(inventory);
         }
 
-        [HttpPost("Delete/{id}")]
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             var inventory = _context.Inventories.FirstOrDefault(c => c.Id == id);
@@ -123,7 +129,7 @@ namespace PizzaSteve.Controllers
             _context.Inventories.Remove(inventory);
             _context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
         }
     }
 }

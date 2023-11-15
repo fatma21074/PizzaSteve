@@ -53,7 +53,7 @@ namespace PizzaSteve.Controllers
             _context.SaveChanges();
 
             //stripe settings
-            var domain = "https://localhost:44326/";
+            var domain = @"https://localhost:44372/";
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string>
@@ -85,6 +85,7 @@ namespace PizzaSteve.Controllers
             options.LineItems.Add(sessionLineItem);
 
             var service = new SessionService();
+            
             Session session = service.Create(options);
 
             order.SessionId = session.Id;

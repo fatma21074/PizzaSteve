@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzaSteve.Data;
 using PizzaSteve.Models;
 
@@ -14,13 +15,14 @@ namespace PizzaSteve.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+      
+        public IActionResult ManageIndex()
         {
-            var category = _context.Categories.ToList();
+            var category =_context.Categories.ToList();
             return View(category);
         }
 
-        [HttpGet("Details/{id}")]
+        [HttpGet]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -36,23 +38,23 @@ namespace PizzaSteve.Controllers
             return View(category);
 
         }
-
-        [HttpGet("Create")]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(Category category)
         {
             _context.Categories.Add(category);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
 
         }
 
-        [HttpGet("Edit/{id}")]
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
 
@@ -71,7 +73,7 @@ namespace PizzaSteve.Controllers
 
         }
 
-        [HttpPost("Edit/{id}")]
+        [HttpPost]
         public IActionResult Edit(Category category)
         {
 
@@ -85,7 +87,7 @@ namespace PizzaSteve.Controllers
             {
                 _context.Update(category);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ManageIndex));
 
             }
 
@@ -94,7 +96,7 @@ namespace PizzaSteve.Controllers
         }
 
 
-        [HttpGet("Delete/{id}")]
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +112,7 @@ namespace PizzaSteve.Controllers
             return View(category);
         }
 
-        [HttpPost("Delete/{id}")]
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             var category = _context.Categories.FirstOrDefault(c => c.Id == id);
@@ -123,7 +125,7 @@ namespace PizzaSteve.Controllers
             _context.Categories.Remove(category);
             _context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
         }
     }
 }

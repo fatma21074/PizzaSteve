@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PizzaSteve.Data;
 using PizzaSteve.Models;
 
@@ -25,7 +26,7 @@ namespace PizzaSteve.Controllers
             return View(New);
         }
 
-        [HttpGet("Details/{id}")]
+        [HttpGet]
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -41,23 +42,23 @@ namespace PizzaSteve.Controllers
             return View(New);
 
         }
-
-        [HttpGet("Create")]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(New New)
         {
             _context.News.Add(New);
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
 
         }
 
-        [HttpGet("Edit/{id}")]
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
 
@@ -75,7 +76,7 @@ namespace PizzaSteve.Controllers
             return View(New);
         }
 
-        [HttpPost("Edit/{id}")]
+        [HttpPost]
         public IActionResult Edit(New New)
         {
 
@@ -89,7 +90,7 @@ namespace PizzaSteve.Controllers
             {
                 _context.Update(New);
                 _context.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(ManageIndex));
 
             }
 
@@ -98,7 +99,7 @@ namespace PizzaSteve.Controllers
         }
 
 
-        [HttpGet("Delete/{id}")]
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,7 +115,7 @@ namespace PizzaSteve.Controllers
             return View(New);
         }
 
-        [HttpPost("Delete/{id}")]
+        [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             var New = _context.News.FirstOrDefault(c => c.Id == id);
@@ -127,7 +128,7 @@ namespace PizzaSteve.Controllers
             _context.News.Remove(New);
             _context.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ManageIndex));
         }
     }
 }

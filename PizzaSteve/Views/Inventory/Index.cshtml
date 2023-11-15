@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PizzaSteve.Models.Inventory>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .page-container {
+            position: relative;
+            height: 100vh;
+            padding-top: 150px;
+            padding-left: 30px;
+            padding-right: 900px;
+            padding-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <h2>Inventories</h2>
+
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </p>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var inventory in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => inventory.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@inventory.Id">Details</a> |
+                            <a asp-action="Edit" asp-route-id="@inventory.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@inventory.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
