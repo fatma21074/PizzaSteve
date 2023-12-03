@@ -10,7 +10,7 @@
                         <span class="subheading">Delicious</span>
                         <h1 class="mb-4">Italian Cuizine</h1>
                         <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    <p><a asp-controller="Order" asp-action="CheckOut" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                    <p><a asp-controller="Product" asp-action="Index" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
                 </div>
                     <div class="col-md-6 ftco-animate">
                         <img src="images/bg_1.png" class="img-fluid" alt="">
@@ -29,7 +29,7 @@
                         <span class="subheading">Crunchy</span>
                         <h1 class="mb-4">Italian Pizza</h1>
                         <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    <p><a asp-controller="Order" asp-action="CheckOut" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                    <p><a asp-controller="Product" asp-action="Index" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
                 </div>
                     <div class="col-md-6 ftco-animate">
                         <img src="images/bg_2.png" class="img-fluid" alt="">
@@ -48,7 +48,7 @@
                         <span class="subheading">Welcome</span>
                         <h1 class="mb-4">We cooked your desired Pizza Recipe</h1>
                         <p class="mb-4 mb-md-5">A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        <p><a  asp-controller="Order" asp-action="CheckOut" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a  asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
+                    <p><a asp-controller="Product" asp-action="Index" class="btn btn-primary p-3 px-xl-4 py-xl-3">Order Now</a> <a asp-controller="Product" asp-action="Index" class="btn btn-white btn-outline-white p-3 px-xl-4 py-xl-3">View Menu</a></p>
                     </div>
 
                 </div>
@@ -161,21 +161,25 @@
                 </div>
             </div>
         </div>
-        </div><div class="row">
+    <div class="container-wrap">
+        <div class="row no-gutters d-flex">
             @foreach (var product in Model)
             {
-                <div class="col-lg-4 col-md-6 text-center">
-                    <div class="single-product-item">
-                        <div class="product-image">
-                            <a asp-controller="Product" asp-action="Details" asp-route-id="@product.Id"><img src="@product.Image" alt=""></a>
+                <div class="col-lg-4 d-flex ftco-animate">
+                    <div class="services-wrap d-flex">
+                        <a href="#" class="img" style="background-image: url(@product.Image);"></a>
+                        <div class="text p-4">
+                            <h3>@product.Name</h3>
+                            <p>@product.Description</p>
+                            <p class="price"><span>$@product.Price</span>
+                            <a asp-controller="Order" asp-action="CheckOut" asp-route-id="@product.Id" class="btn btn-primary p-3 px-xl-4 py-xl-3"><i class="fas fa-shopping-cart"></i> Make an Order</a>
                         </div>
-                        <h3>@product.Name</h3>
-                        <p class="product-price"><span>Pound</span> @product.Price </p>
-                        <a asp-controller="Order" asp-action="Index" asp-route-id="@product.Id" class="cart-btn"><i class="fas fa-shopping-cart"></i> Make an Order</a>
                     </div>
                 </div>
             }
-        </div> 
+
+        </div>
+      
 
         <div class="container">
             <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">

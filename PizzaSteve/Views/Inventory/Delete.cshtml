@@ -1,20 +1,6 @@
 ﻿@model PizzaSteve.Models.Inventory
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        .page-container {
-            position: relative;
-            height: 100vh;
-            padding-top: 150px;
-            padding-left: 30px;
-            padding-right: 900px;
-            padding-bottom: 20px;
-        }
 
-    </style>
-</head>
-<div class="page-container">
+<div class="container">
     <h2>Delete Inventory</h2>
 
     <div>
@@ -29,7 +15,7 @@
             </dd>
         </dl>
 
-        <form asp-action="Delete">
+        <form asp-controller="Inventory" asp-action="DeleteConfirmed">
             <div class="form-group">
                 <input type="hidden" asp-for="Id" />
                 <button type="submit" class="btn btn-danger">Delete</button>

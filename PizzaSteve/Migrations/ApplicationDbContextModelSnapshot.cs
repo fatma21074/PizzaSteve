@@ -168,7 +168,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.Contact", b =>
@@ -200,7 +200,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Contacts");
+                    b.ToTable("Contacts", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.Inventory", b =>
@@ -216,7 +216,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.New", b =>
@@ -241,7 +241,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("News");
+                    b.ToTable("News", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.Order", b =>
@@ -282,7 +282,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.Product", b =>
@@ -317,7 +317,7 @@ namespace PizzaSteve.Migrations
 
                     b.HasIndex("InventoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSteve.Models.User", b =>

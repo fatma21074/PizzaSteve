@@ -15,7 +15,7 @@
             </dd>
         </dl>
 
-        <form asp-action="Delete">
+        <form asp-controller="Product" asp-action="Delete">
             <div class="form-group">
                 <input type="hidden" asp-for="Id" />
                 <button type="submit" class="btn btn-danger">Delete</button>

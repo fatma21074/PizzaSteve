@@ -31,7 +31,7 @@
                 Description
             </th>
             <th>
-                Buy
+                Details
             </th>
             <th>
                 Edit
@@ -49,8 +49,8 @@
                     @if (obj.Image != null)
                     {
                         <img id="ProductPicture" alt="profile" class="avatar rounded-circle" style="width: 50px;
-    height: 50px;
-    object-fit: cover" src="@obj.Image" />
+                           height: 50px;
+                           object-fit: cover" src="@obj.Image" />
                     }
                     else
                     {
@@ -69,8 +69,8 @@
                 </th>
                 <th width=5%>
                     <div class="w-75 btn-group" role="group">
-                        <a asp-controller="Order" asp-action="CheckOut" asp-route-id="@obj.Id" class="btn btn-sm btn-primary mx-2">
-                            Buy Now
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@obj.Id" class="btn btn-sm btn-primary mx-2">
+                           Details
                         </a>
                     </div>
                 </th>

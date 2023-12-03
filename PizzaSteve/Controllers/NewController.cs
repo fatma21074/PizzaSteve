@@ -124,11 +124,12 @@ namespace PizzaSteve.Controllers
             {
                 return NotFound();
             }
+            
+                _context.News.Remove(New);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(ManageIndex));
+            
 
-            _context.News.Remove(New);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(ManageIndex));
         }
     }
 }

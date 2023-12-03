@@ -28,9 +28,9 @@ namespace PizzaSteve.Controllers
             return View(products);
         }
 
-        public IActionResult Details(int? id)
+        public IActionResult Details(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -68,9 +68,9 @@ namespace PizzaSteve.Controllers
             return View(product);
         }
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -104,10 +104,10 @@ namespace PizzaSteve.Controllers
             ViewBag.Inventories = _context.Inventories.ToList();
             return View(product);
         }
-        [HttpGet]
-        public IActionResult Delete(int? id)
+		[HttpGet("Delete/{id}")]
+		public IActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -120,8 +120,8 @@ namespace PizzaSteve.Controllers
             return View(product);
         }
 
-        [HttpPost]
-        public IActionResult DeleteConfirmed(int id)
+		[HttpPost("Delete/{id}")]
+		public IActionResult DeleteConfirmed(int id)
         {
             var product = _context.Products.FirstOrDefault(c => c.Id == id);
 
@@ -129,10 +129,8 @@ namespace PizzaSteve.Controllers
             {
                 return NotFound();
             }
-
             _context.Products.Remove(product);
             _context.SaveChanges();
-
             return RedirectToAction(nameof(IndexManage));
         }
     }

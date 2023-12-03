@@ -1,4 +1,6 @@
-﻿namespace PizzaSteve.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PizzaSteve.Models
 {
     public class Product
     {
