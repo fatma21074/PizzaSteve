@@ -12,8 +12,8 @@ using PizzaSteve.Data;
 namespace PizzaSteve.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231105213512_fefe")]
-    partial class fefe
+    [Migration("20240905232556_initialmigration")]
+    partial class initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,28 +158,6 @@ namespace PizzaSteve.Migrations
                     b.ToTable("UserTokens", "Security");
                 });
 
-            modelBuilder.Entity("PizzaSteve.Models.Admin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Admin");
-                });
-
             modelBuilder.Entity("PizzaSteve.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -188,15 +166,10 @@ namespace PizzaSteve.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
 
                     b.ToTable("Categories");
                 });
@@ -323,9 +296,6 @@ namespace PizzaSteve.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -345,8 +315,6 @@ namespace PizzaSteve.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
 
                     b.HasIndex("CategoryId");
 
@@ -483,17 +451,6 @@ namespace PizzaSteve.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PizzaSteve.Models.Category", b =>
-                {
-                    b.HasOne("PizzaSteve.Models.Admin", "Admin")
-                        .WithMany()
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Admin");
-                });
-
             modelBuilder.Entity("PizzaSteve.Models.Contact", b =>
                 {
                     b.HasOne("PizzaSteve.Models.User", "User")
@@ -522,12 +479,6 @@ namespace PizzaSteve.Migrations
 
             modelBuilder.Entity("PizzaSteve.Models.Product", b =>
                 {
-                    b.HasOne("PizzaSteve.Models.Admin", "Admin")
-                        .WithMany()
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PizzaSteve.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -539,8 +490,6 @@ namespace PizzaSteve.Migrations
                         .HasForeignKey("InventoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Admin");
 
                     b.Navigation("Category");
 
